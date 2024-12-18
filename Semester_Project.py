@@ -14,12 +14,21 @@ def determine_winner(player1, player2):
     else:
         return "player2"  # player2 wins
 
+# Function to get valid input from a player (rock, paper, or scissors)
+def get_valid_move(player_number):
+    # Loop until the player enters a valid move
+    while True:
+        move = input(f"Player {player_number}, enter either rock, paper, or scissors: ").lower()
+        if move in ["rock", "paper", "scissors"]:
+            return move
+        else:
+            print("Invalid input! Please enter rock, paper, or scissors.")
+
 # Main game function that processes one round of the game
 def play_game(scores):
-    # Get player 1's move and convert it to lowercase for consistency
-    player1 = input("Player 1, enter either rock, paper, or scissors: ").lower()
-    # Get player 2's move and convert it to lowercase for consistency
-    player2 = input("Player 2, enter either rock, paper, or scissors: ").lower()
+    # Get valid moves from both players
+    player1 = get_valid_move(1)
+    player2 = get_valid_move(2)
 
     # Call the helper function to determine the winner of the round
     result = determine_winner(player1, player2)
@@ -42,7 +51,9 @@ def start_game():
     # Infinite loop to continue the game until one player reaches 2 points
     while True:
         # Call the play_game function and update the scores
+        global scores  # Declare the global variable to modify it inside the function
         scores = play_game(scores)
+        
         # Display the current score after each round
         print(f"Current score - Player 1: {scores['player1']} Player 2: {scores['player2']}")
         
@@ -55,4 +66,5 @@ def start_game():
             break
 
 # Start the game by calling the start_game function
-start_game() does this code still conform to python?
+start_game()
+
